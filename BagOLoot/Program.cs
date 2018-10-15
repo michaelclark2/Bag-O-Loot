@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace BagOLoot
 {
@@ -6,7 +10,14 @@ namespace BagOLoot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            var BagOLoot = new BagOLoot(configuration);
+            BagOLoot.Start();
         }
     }
 }
