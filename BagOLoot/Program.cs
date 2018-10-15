@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using BagOLoot.DataAccess;
+using BagOLoot.Actions;
 
 namespace BagOLoot
 {
@@ -16,8 +18,22 @@ namespace BagOLoot
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
 
-            var BagOLoot = new BagOLoot(configuration);
-            BagOLoot.Start();
+            var BagOLoot = new MainMenu();
+            var book = new ChildrenRegister(configuration);
+
+            int choice;
+
+            do
+            {
+                choice = BagOLoot.Start();
+
+                switch (choice)
+                {
+                    case 1:
+                        CreateChild.Action(book);
+                        break;
+                }
+            } while (choice != 7);
         }
     }
 }

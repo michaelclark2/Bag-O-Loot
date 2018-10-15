@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Actions\CreateChild.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="dapper" Version="1.50.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
