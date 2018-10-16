@@ -42,7 +42,7 @@ namespace BagOLoot.DataAccess
                         {
                             Id = reader.GetInt32(0),
                             Name = reader[1].ToString(),
-                            Delivered = reader.GetInt32(0) == 1
+                            Delivered = reader.GetBoolean(2)
                         });
                     }
                 });
