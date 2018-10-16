@@ -21,7 +21,7 @@ namespace BagOLoot
             Console.Write("> ");
             int childId = int.Parse(Console.ReadLine());
 
-            var kid = childRegister.GetChildren().First(c => c.Id == childId);
+            var kid = childRegister.GetChild(childId);
 
             Console.WriteLine("Enter a toy");
             Console.Write("> ");

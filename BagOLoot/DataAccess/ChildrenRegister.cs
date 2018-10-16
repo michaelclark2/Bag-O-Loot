@@ -44,5 +44,6 @@ namespace BagOLoot.DataAccess
 
             return _children;
         }
+        public Child GetChild(int id) => _children.SingleOrDefault(c => c.Id == id);
     }
 }

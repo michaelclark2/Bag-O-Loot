@@ -45,7 +45,7 @@ namespace BagOLoot
                 connection.Open();
                 var dbCommand = connection.CreateCommand();
                 dbCommand.CommandText = command;
-                //dbCommand.ExecuteNonQuery();
+                
 
                 this.Query(command + " SELECT SCOPE_IDENTITY()",
                     (SqlDataReader reader) =>
@@ -55,9 +55,25 @@ namespace BagOLoot
                             insertedId = (int)reader.GetDecimal(0);
                         }
                     });
+                dbCommand.Dispose();
+
             }
 
             return insertedId;
+        }
+
+        public void Delete(string command)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var dbCommand = connection.CreateCommand();
+                dbCommand.CommandText = command;
+
+                dbCommand.ExecuteNonQuery();
+
+                dbCommand.Dispose();
+            }
         }
     }
 }

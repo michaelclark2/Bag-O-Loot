@@ -33,5 +33,28 @@ namespace BagOLoot
 
             return toy;
         }
+
+        public IEnumerable<Toy> GetToysForChild(Child kid)
+        {
+            var toys = new List<Toy>();
+            _db.Query($"SELECT * FROM Toys WHERE ChildId = {kid.Id}",
+                (SqlDataReader reader) => {
+                    while (reader.Read())
+                    {
+                        toys.Add(new Toy()
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader[1].ToString(),
+                            ChildId = reader.GetInt32(2)
+                        });
+                    }
+                });
+            return toys;
+        }
+
+        public void RevokeToy(Toy toy, Child kid)
+        {
+            _db.Delete($"DELETE FROM Toys WHERE Id = {toy.Id}");
+        }
     }
 }
