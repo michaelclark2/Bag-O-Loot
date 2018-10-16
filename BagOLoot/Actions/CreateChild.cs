@@ -15,8 +15,7 @@ namespace BagOLoot.Actions
             string childName = Console.ReadLine();
             int id = registry.AddChild(childName);
             Console.WriteLine(id);
-
-
+            
         }
     }
 }

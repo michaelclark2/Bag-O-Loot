@@ -29,5 +29,13 @@ namespace BagOLoot.DataAccess
                 return id;
             }
         }
+        public IEnumerable<Child> GetChildren()
+        {
+            using (var db = new SqlConnection(_config.GetConnectionString("LootBag")))
+            {
+                _children = db.Query<Child>("SELECT * FROM Children").ToList();
+            }
+            return _children;
+        }
     }
 }

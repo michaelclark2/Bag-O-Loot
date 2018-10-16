@@ -20,6 +20,7 @@ namespace BagOLoot
 
             var BagOLoot = new MainMenu();
             var book = new ChildrenRegister(configuration);
+            var bag = new ToyRegister(configuration);
 
             int choice;
 
@@ -31,6 +32,9 @@ namespace BagOLoot
                 {
                     case 1:
                         CreateChild.Action(book);
+                        break;
+                    case 2:
+                        AddToy.Action(bag, book);
                         break;
                 }
             } while (choice != 7);
