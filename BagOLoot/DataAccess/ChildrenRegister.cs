@@ -11,30 +11,37 @@ namespace BagOLoot.DataAccess
 {
     public class ChildrenRegister
     {
-        IConfiguration _config;
+        DatabaseInterface _db;
         List<Child> _children = new List<Child>();
 
-        public ChildrenRegister(IConfiguration config)
+        public ChildrenRegister(DatabaseInterface db)
         {
-            _config = config;
+            _db = db;
         }
 
         public int AddChild(string child)
         {
-            using (var db = new SqlConnection(_config.GetConnectionString("LootBag")))
-            {
-                db.Execute($"INSERT INTO Children(Name, Delivered) VALUES ('{child}', 0)");
-                int id = db.Query<int>("SELECT Id FROM Children WHERE Id = (SELECT MAX(Id) FROM Children)").First();
-                _children.Add(new Child() { Id = id, Name = child, Delivered = false });
-                return id;
-            }
+            return _db.Insert($"INSERT INTO Children(Name, Delivered) VALUES ('{child}', 0)");
         }
+
         public IEnumerable<Child> GetChildren()
         {
-            using (var db = new SqlConnection(_config.GetConnectionString("LootBag")))
-            {
-                _children = db.Query<Child>("SELECT * FROM Children").ToList();
-            }
+
+            _db.Query("SELECT * FROM Children",
+                (SqlDataReader reader) =>
+                {
+                    _children.Clear();
+                    while (reader.Read())
+                    {
+                        _children.Add(new Child()
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader[1].ToString(),
+                            Delivered = reader.GetInt32(0) == 1
+                        });
+                    }
+                });
+
             return _children;
         }
     }

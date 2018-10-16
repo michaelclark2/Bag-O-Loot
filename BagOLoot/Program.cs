@@ -13,14 +13,11 @@ namespace BagOLoot
         static void Main(string[] args)
         {
 
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
+            var db = new DatabaseInterface("LootBag");
 
             var BagOLoot = new MainMenu();
-            var book = new ChildrenRegister(configuration);
-            var bag = new ToyRegister(configuration);
+            var book = new ChildrenRegister(db);
+            var bag = new ToyRegister(db);
 
             int choice;
 
