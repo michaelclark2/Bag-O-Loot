@@ -2,7 +2,7 @@
 using System.Linq;
 using BagOLoot.DataAccess;
 
-namespace BagOLoot
+namespace BagOLoot.Actions
 {
     public class RevokeToy
     {

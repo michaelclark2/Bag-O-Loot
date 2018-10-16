@@ -36,6 +36,12 @@ namespace BagOLoot
                     case 3:
                         RevokeToy.Action(bag, book);
                         break;
+                    case 4:
+                        ShowBag.Action(bag, book);
+                        break;
+                    case 5:
+                        DeliverToys.Action(book);
+                        break;
                 }
             } while (choice != 7);
         }

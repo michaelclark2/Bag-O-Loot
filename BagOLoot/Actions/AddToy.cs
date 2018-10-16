@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace BagOLoot
+namespace BagOLoot.Actions
 {
     public class AddToy
     {

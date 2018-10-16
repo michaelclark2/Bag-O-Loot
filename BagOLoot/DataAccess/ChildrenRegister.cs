@@ -24,6 +24,11 @@ namespace BagOLoot.DataAccess
             return _db.Insert($"INSERT INTO Children(Name, Delivered) VALUES ('{child}', 0)");
         }
 
+        public void DeliverToChild(Child kid)
+        {
+            _db.Delete($"UPDATE Children SET Delivered = 1 WHERE Id = {kid.Id}");
+        }
+
         public IEnumerable<Child> GetChildren()
         {
 
